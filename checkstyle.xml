@@ -1,0 +1,8 @@
+<module name="Indentation">
+    <property name="basicOffset" value="2"/>
+    <property name="braceAdjustment" value="0"/>
+    <property name="caseIndent" value="2"/>
+    <property name="lineWrappingIndentation" value="2"/>
+    <property name="arrayInitIndent" value="2"/>
+    <property name="memberIndent" value="2"/>
+</module>
