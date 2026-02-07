@@ -1,22 +1,43 @@
 package com.wildrifttracker.core.usecases.player;
 
-import com.wildrifttracker.infra.models.player.PlayerModel;
-import com.wildrifttracker.interfaces.http.presentation.player.records.PlayerRequestRecord;
+import com.wildrifttracker.domain.enums.ErrorMessages;
+import com.wildrifttracker.infra.database.models.Player;
+import com.wildrifttracker.infra.database.repositories.PlayerRepository;
+import com.wildrifttracker.domain.dtos.player.CreatePlayerPayloadDto;
+import com.wildrifttracker.infra.exceptions.NotFoundException;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
+
+import java.util.List;
 
 @Service
+@Validated
 public class RegisterPlayerUseCase {
-    public PlayerModel execute(PlayerRequestRecord payload) {
-        PlayerModel newPlayer = new PlayerModel();
+    private final PlayerRepository playerRepository;
 
-        newPlayer.setPlayerId("123");
+    @Autowired
+    public RegisterPlayerUseCase(PlayerRepository playerRepository) {
+        this.playerRepository = playerRepository;
+    }
+
+    public List<Player> getAll() {
+        return this.playerRepository.findAll();
+    }
+
+    public Player getById(Long playerId) {
+        return this.playerRepository
+                .findById(playerId)
+                .orElseThrow(
+                        () -> new NotFoundException(ErrorMessages.PLAYER_NOT_FOUND.getMessage())
+                );
+    }
+
+    public Player create(@Valid CreatePlayerPayloadDto payload) {
+        Player newPlayer = new Player();
         newPlayer.setNickname(payload.nickname());
-        newPlayer.setTotalMatchs(0);
-        newPlayer.setRank(payload.rank());
-        newPlayer.setVictoryCount(0);
-        newPlayer.setDefeatCount(0);
-        newPlayer.setWinRate(0);
 
-        return newPlayer;
+        return this.playerRepository.save(newPlayer);
     }
 }

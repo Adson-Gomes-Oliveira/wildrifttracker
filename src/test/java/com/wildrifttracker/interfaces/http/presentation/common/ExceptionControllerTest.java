@@ -3,6 +3,7 @@ package com.wildrifttracker.interfaces.http.presentation.common;
 import com.wildrifttracker.infra.exceptions.BusinessException;
 import com.wildrifttracker.infra.exceptions.ErrorException;
 import com.wildrifttracker.infra.exceptions.IntegrationException;
+import com.wildrifttracker.interfaces.http.presentation.controllers.ExceptionController;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;

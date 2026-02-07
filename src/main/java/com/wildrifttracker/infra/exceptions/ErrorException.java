@@ -7,6 +7,6 @@ import java.util.HashMap;
 public record ErrorException(
         String message,
         String errorName,
-        HttpStatus errorCode,
+        int errorCode,
         HashMap<String, String> details
 ) {}

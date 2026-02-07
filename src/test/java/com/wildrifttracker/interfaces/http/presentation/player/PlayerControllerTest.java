@@ -1,12 +1,13 @@
 package com.wildrifttracker.interfaces.http.presentation.player;
 
 import com.wildrifttracker.core.usecases.player.RegisterPlayerUseCase;
-import com.wildrifttracker.infra.models.player.PlayerModel;
-import com.wildrifttracker.interfaces.http.presentation.player.records.PlayerRequestRecord;
+import com.wildrifttracker.domain.dtos.player.CreatePlayerPayloadDto;
+import com.wildrifttracker.domain.dtos.player.ReturnPlayerDto;
+import com.wildrifttracker.infra.database.models.Player;
+import com.wildrifttracker.interfaces.http.presentation.controllers.PlayerController;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -22,28 +23,16 @@ public class PlayerControllerTest {
         RegisterPlayerUseCase registerPlayerUseCase = Mockito.mock(RegisterPlayerUseCase.class);
 
         PlayerController playerController = new PlayerController(registerPlayerUseCase);
-        PlayerRequestRecord playerPayload = new PlayerRequestRecord("test", "test");
-        PlayerModel playerResult = new PlayerModel();
+        CreatePlayerPayloadDto playerPayload = new CreatePlayerPayloadDto("test");
+        Player playerResult = new Player();
 
-        playerResult.setPlayerId("123");
         playerResult.setNickname(playerPayload.nickname());
-        playerResult.setTotalMatchs(0);
-        playerResult.setRank(playerPayload.rank());
-        playerResult.setVictoryCount(0);
-        playerResult.setDefeatCount(0);
-        playerResult.setWinRate(0);
 
-        Mockito.when(registerPlayerUseCase.execute(playerPayload)).thenReturn(playerResult);
+        Mockito.when(registerPlayerUseCase.create(playerPayload)).thenReturn(playerResult);
 
-        ResponseEntity<PlayerModel> result = playerController.registerPlayer(playerPayload);
+        ResponseEntity<ReturnPlayerDto> result = playerController.registerPlayer(playerPayload);
 
         assertEquals(HttpStatus.CREATED, result.getStatusCode());
-        assertEquals(playerResult.getPlayerId(), Objects.requireNonNull(result.getBody()).getPlayerId());
-        assertEquals(playerResult.getNickname(), Objects.requireNonNull(result.getBody()).getNickname());
-        assertEquals(playerResult.getTotalMatchs(), Objects.requireNonNull(result.getBody()).getTotalMatchs());
-        assertEquals(playerResult.getRank(), Objects.requireNonNull(result.getBody()).getRank());
-        assertEquals(playerResult.getVictoryCount(), Objects.requireNonNull(result.getBody()).getVictoryCount());
-        assertEquals(playerResult.getDefeatCount(), Objects.requireNonNull(result.getBody()).getDefeatCount());
-        assertEquals(playerResult.getWinRate(), Objects.requireNonNull(result.getBody()).getWinRate());
+        assertEquals(playerResult.getNickname(), Objects.requireNonNull(result.getBody()).nickname());
     }
 }

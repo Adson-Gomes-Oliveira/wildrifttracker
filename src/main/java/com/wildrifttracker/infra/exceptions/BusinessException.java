@@ -8,14 +8,14 @@ import java.util.HashMap;
 @ResponseStatus(value = HttpStatus.UNPROCESSABLE_ENTITY)
 public class BusinessException extends RuntimeException {
     private final String errorName;
-    private final HttpStatus errorCode;
+    private final int errorCode;
     private final HashMap<String, String> details;
 
     public BusinessException(String message, String[] args) {
         super(message);
 
         this.errorName = "Business Exception";
-        this.errorCode = HttpStatus.UNPROCESSABLE_ENTITY;
+        this.errorCode = HttpStatus.UNPROCESSABLE_ENTITY.value();
         this.details = new HashMap<>();
 
         if (args.length % 2 == 0 && args.length != 0) {
@@ -29,7 +29,7 @@ public class BusinessException extends RuntimeException {
         return details;
     }
 
-    public HttpStatus getErrorCode() {
+    public int getErrorCode() {
         return errorCode;
     }
 

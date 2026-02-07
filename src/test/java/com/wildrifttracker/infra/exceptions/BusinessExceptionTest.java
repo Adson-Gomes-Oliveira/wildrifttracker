@@ -26,7 +26,7 @@ public class BusinessExceptionTest {
 
         assertEquals("Test error", exception.getMessage());
         assertEquals("Business Exception", exception.getErrorName());
-        assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, exception.getErrorCode());
+        assertEquals(HttpStatus.UNPROCESSABLE_ENTITY.value(), exception.getErrorCode());
         assertEquals(argsTest, exception.getDetails());
     }
 
@@ -43,7 +43,7 @@ public class BusinessExceptionTest {
 
         assertEquals("Test error", exception.getMessage());
         assertEquals("Business Exception", exception.getErrorName());
-        assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, exception.getErrorCode());
+        assertEquals(HttpStatus.UNPROCESSABLE_ENTITY.value(), exception.getErrorCode());
         assertEquals(argsTest, exception.getDetails());
     }
 
@@ -60,7 +60,7 @@ public class BusinessExceptionTest {
 
         assertEquals("Test error", exception.getMessage());
         assertEquals("Business Exception", exception.getErrorName());
-        assertEquals(HttpStatus.UNPROCESSABLE_ENTITY, exception.getErrorCode());
+        assertEquals(HttpStatus.UNPROCESSABLE_ENTITY.value(), exception.getErrorCode());
         assertEquals(argsTest, exception.getDetails());
     }
 }
