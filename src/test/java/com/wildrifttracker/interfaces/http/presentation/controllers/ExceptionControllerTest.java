@@ -1,9 +1,9 @@
-package com.wildrifttracker.interfaces.http.presentation.common;
+package com.wildrifttracker.interfaces.http.presentation.controllers;
 
 import com.wildrifttracker.infra.exceptions.BusinessException;
 import com.wildrifttracker.infra.exceptions.ErrorException;
 import com.wildrifttracker.infra.exceptions.IntegrationException;
-import com.wildrifttracker.interfaces.http.presentation.controllers.ExceptionController;
+import com.wildrifttracker.infra.exceptions.NotFoundException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
@@ -13,9 +13,9 @@ import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@DisplayName("Interface Test: Exception Controller")
+@DisplayName("Interfaces :: Http :: Presentation :: Controllers :: ExceptionController")
 public class ExceptionControllerTest {
-    @DisplayName("Testing method: handleBusinessException - Should correctly deal with Business Exceptions")
+    @DisplayName("Testing method: handleBusinessException")
     @Test
     public void handleBusinessException() {
         String[] args = {};
@@ -35,7 +35,7 @@ public class ExceptionControllerTest {
         assertEquals(errorResult, result.getBody());
     }
 
-    @DisplayName("Testing method: handleIntegrationException - Should correctly deal with Integration Exceptions")
+    @DisplayName("Testing method: handleIntegrationException")
     @Test
     public void handleIntegrationException() {
         IntegrationException error = new IntegrationException("Error test");
@@ -51,6 +51,44 @@ public class ExceptionControllerTest {
         ResponseEntity<Object> result = exceptionController.handleIntegrationException(error);
 
         assertEquals(HttpStatus.SERVICE_UNAVAILABLE, result.getStatusCode());
+        assertEquals(errorResult, result.getBody());
+    }
+
+    @DisplayName("Testing method: handleNotFoundException")
+    @Test
+    public void handleNotFoundException() {
+        NotFoundException error = new NotFoundException("Error test");
+        ExceptionController exceptionController = new ExceptionController();
+
+        ErrorException errorResult = new ErrorException(
+                error.getMessage(),
+                error.getErrorName(),
+                error.getErrorCode(),
+                new HashMap<>()
+        );
+
+        ResponseEntity<Object> result = exceptionController.handleNotFoundException(error);
+
+        assertEquals(HttpStatus.NOT_FOUND, result.getStatusCode());
+        assertEquals(errorResult, result.getBody());
+    }
+
+    @DisplayName("Testing method: handleException")
+    @Test
+    public void handleException() {
+        Exception error = new Exception("Error test");
+        ExceptionController exceptionController = new ExceptionController();
+
+        ErrorException errorResult = new ErrorException(
+                error.getMessage(),
+                "",
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                new HashMap<>()
+        );
+
+        ResponseEntity<Object> result = exceptionController.handleException(error);
+
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, result.getStatusCode());
         assertEquals(errorResult, result.getBody());
     }
 }

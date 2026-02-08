@@ -9,9 +9,9 @@ import java.util.HashMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@DisplayName("Infra Test: Integration Exception")
+@DisplayName("Infra :: Exceptions :: IntegrationException")
 public class IntegrationExceptionTest {
-    @DisplayName("Testing method: Error Throw - Should throw")
+    @DisplayName("Testing error throw")
     @Test
     public void exceptionThrow() {
         IntegrationException exception = assertThrows(
