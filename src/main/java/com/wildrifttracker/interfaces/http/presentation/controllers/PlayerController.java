@@ -1,5 +1,6 @@
 package com.wildrifttracker.interfaces.http.presentation.controllers;
 
+import com.wildrifttracker.core.usecases.player.RecoverPlayerUseCase;
 import com.wildrifttracker.core.usecases.player.RegisterPlayerUseCase;
 import com.wildrifttracker.domain.dtos.player.ReturnPlayerDto;
 import com.wildrifttracker.domain.utils.DataPreparer;
@@ -18,15 +19,20 @@ import java.util.List;
 @Tag(name = "Player")
 public class PlayerController {
     private final RegisterPlayerUseCase registerPlayerUseCase;
+    private final RecoverPlayerUseCase recoverPlayerUseCase;
 
     @Autowired
-    public PlayerController(RegisterPlayerUseCase registerPlayerUseCase) {
+    public PlayerController(
+            RegisterPlayerUseCase registerPlayerUseCase,
+            RecoverPlayerUseCase recoverPlayerUseCase
+    ) {
+        this.recoverPlayerUseCase = recoverPlayerUseCase;
         this.registerPlayerUseCase = registerPlayerUseCase;
     }
 
     @GetMapping
     public ResponseEntity<List<ReturnPlayerDto>> getAllPlayers() {
-        List<Player> result = this.registerPlayerUseCase.getAll();
+        List<Player> result = this.recoverPlayerUseCase.getAll();
 
         List<ReturnPlayerDto> resultSanitized = DataPreparer
                 .sanitizeListData(ReturnPlayerDto::new, result);
@@ -36,7 +42,7 @@ public class PlayerController {
 
     @GetMapping("/{playerId}")
     public ResponseEntity<ReturnPlayerDto> getPlayerById(@PathVariable Long playerId) {
-        Player result = this.registerPlayerUseCase.getById(playerId);
+        Player result = this.recoverPlayerUseCase.getById(playerId);
 
         ReturnPlayerDto resultSanitized = DataPreparer
                 .sanitizeUniqueData(ReturnPlayerDto::new, result);

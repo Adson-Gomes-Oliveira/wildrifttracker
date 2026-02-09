@@ -1,11 +1,10 @@
 package com.wildrifttracker.interfaces.http.presentation.controllers;
 
+import com.wildrifttracker.core.usecases.user.RecoverUserUseCase;
 import com.wildrifttracker.core.usecases.user.RegisterUserUseCase;
-import com.wildrifttracker.domain.dtos.player.ReturnPlayerDto;
 import com.wildrifttracker.domain.dtos.user.CreateUserPayloadDto;
 import com.wildrifttracker.domain.dtos.user.ReturnUserDto;
 import com.wildrifttracker.domain.utils.DataPreparer;
-import com.wildrifttracker.infra.database.models.Player;
 import com.wildrifttracker.infra.database.models.User;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,15 +19,20 @@ import java.util.List;
 @Tag(name = "User")
 public class UserController {
     private final RegisterUserUseCase registerUserUseCase;
+    private final RecoverUserUseCase recoverUserUseCase;
 
     @Autowired
-    public UserController(RegisterUserUseCase registerUserUseCase) {
+    public UserController(
+            RegisterUserUseCase registerUserUseCase,
+            RecoverUserUseCase recoverUserUseCase
+    ) {
+        this.recoverUserUseCase = recoverUserUseCase;
         this.registerUserUseCase = registerUserUseCase;
     }
 
     @GetMapping
     public ResponseEntity<List<ReturnUserDto>> getAllUsers() {
-        List<User> result = this.registerUserUseCase.getAll();
+        List<User> result = this.recoverUserUseCase.getAll();
 
         List<ReturnUserDto> resultSanitized = DataPreparer
                 .sanitizeListData(ReturnUserDto::new, result);
@@ -38,7 +42,7 @@ public class UserController {
 
     @GetMapping("/{userId}")
     public ResponseEntity<ReturnUserDto> getUserById(@PathVariable Long userId) {
-        User result = this.registerUserUseCase.getById(userId);
+        User result = this.recoverUserUseCase.getById(userId);
 
         ReturnUserDto resultSanitized = DataPreparer
                 .sanitizeUniqueData(ReturnUserDto::new, result);
