@@ -16,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/tracker/champion")
-@Tag(name = "champions")
+@Tag(name = "Champions")
 public class ChampionController {
     private final RecoverChampionUseCase recoverChampionUseCase;
     private final RegisterChampionUseCase registerChampionUseCase;
