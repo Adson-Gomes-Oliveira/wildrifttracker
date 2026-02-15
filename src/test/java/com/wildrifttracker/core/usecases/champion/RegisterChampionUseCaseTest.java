@@ -9,7 +9,7 @@ import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@DisplayName("Core :: Usecases :: Champion :: RegisterChampionUseCaseTest")
+@DisplayName("Core :: Usecases :: Champion :: RegisterItemUseCaseTest")
 public class RegisterChampionUseCaseTest {
     @DisplayName("Testing method: create")
     @Test

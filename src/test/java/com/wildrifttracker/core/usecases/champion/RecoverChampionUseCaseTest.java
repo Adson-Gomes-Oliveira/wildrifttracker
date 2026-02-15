@@ -14,7 +14,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@DisplayName("Core :: Usecases :: Champion :: RecoverChampionUseCaseTest")
+@DisplayName("Core :: Usecases :: Champion :: RecoverItemUseCaseTest")
 public class RecoverChampionUseCaseTest {
     @DisplayName("Testing method: getAll")
     @Test
