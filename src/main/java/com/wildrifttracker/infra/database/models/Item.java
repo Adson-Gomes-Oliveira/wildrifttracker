@@ -9,6 +9,10 @@ public class Item extends Base {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long itemId;
 
+    private String name;
+    private String attributes;
+    private int cost;
+
     public Long getItemId() {
         return itemId;
     }
@@ -40,8 +44,4 @@ public class Item extends Base {
     public void setCost(int cost) {
         this.cost = cost;
     }
-
-    private String name;
-    private String attributes;
-    private int cost;
 }

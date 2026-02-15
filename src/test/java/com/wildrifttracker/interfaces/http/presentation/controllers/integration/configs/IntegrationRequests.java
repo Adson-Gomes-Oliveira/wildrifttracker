@@ -1,4 +1,4 @@
-package com.wildrifttracker.core.integration.configs;
+package com.wildrifttracker.interfaces.http.presentation.controllers.integration.configs;
 
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;

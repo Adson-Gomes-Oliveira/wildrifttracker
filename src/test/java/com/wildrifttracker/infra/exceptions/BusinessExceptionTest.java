@@ -9,9 +9,9 @@ import java.util.HashMap;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@DisplayName("Infra Test: Business Exception")
+@DisplayName("Infra :: Exceptions :: BusinessException")
 public class BusinessExceptionTest {
-    @DisplayName("Testing method: Error Throw - Should throw error with details")
+    @DisplayName("Testing error throw: Should throw error with details")
     @Test
     public void exceptionThrowWithDetails() {
         String[] args = {"name", "wrong path"};
@@ -30,7 +30,7 @@ public class BusinessExceptionTest {
         assertEquals(argsTest, exception.getDetails());
     }
 
-    @DisplayName("Testing method: Error Throw - Should throw error without details")
+    @DisplayName("Testing error throw: Should throw error without details")
     @Test
     public void exceptionThrowWithoutDetails() {
         String[] args = {};
@@ -47,7 +47,7 @@ public class BusinessExceptionTest {
         assertEquals(argsTest, exception.getDetails());
     }
 
-    @DisplayName("Testing method: Error Throw - Should not throw error with details when insufficient args")
+    @DisplayName("Testing error throw: Should not throw error with details when insufficient args")
     @Test
     public void exceptionThrowIncorrectArgs() {
         String[] args = {"name"};

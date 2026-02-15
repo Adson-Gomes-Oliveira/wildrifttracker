@@ -1,4 +1,4 @@
-package com.wildrifttracker.core.integration.configs;
+package com.wildrifttracker.interfaces.http.presentation.controllers.integration.configs;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;

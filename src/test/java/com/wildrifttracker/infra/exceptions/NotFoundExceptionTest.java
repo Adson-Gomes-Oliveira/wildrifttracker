@@ -7,9 +7,9 @@ import org.springframework.http.HttpStatus;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-@DisplayName("Infra Test: Not Found Exception")
+@DisplayName("Infra :: Exceptions :: NotFoundException")
 public class NotFoundExceptionTest {
-    @DisplayName("Testing method: Error Throw - Should throw")
+    @DisplayName("Testing error throw")
     @Test
     public void exceptionThrow() {
         NotFoundException exception = assertThrows(

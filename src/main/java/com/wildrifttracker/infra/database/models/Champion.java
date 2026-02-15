@@ -13,6 +13,7 @@ public class Champion extends Base {
     private String role;
     private String difficultyLevel;
     private String type;
+    private String riotReferenceUrl;
 
     public Long getChampionId() {
         return championId;
@@ -61,6 +62,4 @@ public class Champion extends Base {
     public void setRiotReferenceUrl(String riotReferenceUrl) {
         this.riotReferenceUrl = riotReferenceUrl;
     }
-
-    private String riotReferenceUrl;
 }
